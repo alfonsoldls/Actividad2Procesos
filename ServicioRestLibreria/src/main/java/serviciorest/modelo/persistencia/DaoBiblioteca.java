@@ -35,7 +35,7 @@ public class DaoBiblioteca {
 	//AÑADIR UN LIBRO
 	public boolean altaLibro(Libro l) {
 			for (Libro lb: listaLibros) {
-				if (lb.getId() == lb.getId() || lb.getTitulo().equalsIgnoreCase(lb.getTitulo())) {
+				if (l.getId() == lb.getId() || l.getTitulo().equalsIgnoreCase(lb.getTitulo())) {
 					return true;
 				}
 			}
@@ -46,7 +46,13 @@ public class DaoBiblioteca {
 	//DAR DE BAJA UN LIBRO POR ID
 	public Libro borrarLibro(int id) {
 		try {
-			return listaLibros.remove(id);
+			for (Libro lb : listaLibros) {
+				if (id == lb.getId()) {
+					return listaLibros.remove(listaLibros.indexOf(lb));
+				}
+			}
+			return null;
+			
 		} catch (IndexOutOfBoundsException e) {
 			System.out.println("No se ha encontrado ningun libro con ese ID");
 			return null;
@@ -82,7 +88,7 @@ public class DaoBiblioteca {
 				Libro encontrado = null;
 				for(Libro l : listaLibros) {
 					if(l.getId() == id) {
-						encontrado = listaLibros.get(id);
+						encontrado = l;
 					}
 				}
 				return encontrado;

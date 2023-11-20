@@ -18,7 +18,7 @@ import serviciorest.cliente.entidad.Libro;
 public class ServicioProxyBiblioteca {
 
 	//La URL base del servicio REST de libros
-	public static final String URL = "http://localhost:8080/";
+	public static final String URL = "http://localhost:8080/libros";
 		
 	//Inyectamos el objeto de tipo RestTemplate que nos ayudará
 	//a hacer las peticiones HTTP al servicio REST
@@ -27,10 +27,10 @@ public class ServicioProxyBiblioteca {
 	private RestTemplate restTemplate;
 	
 	
-	
+	//Obtener un libro por ID
 	public Libro obtener(int id){
 		try {
-			ResponseEntity<Libro> re = restTemplate.getForEntity(URL + id, Libro.class);
+			ResponseEntity<Libro> re = restTemplate.getForEntity(URL + "/" + id, Libro.class);
 			HttpStatus hs= re.getStatusCode();
 			if(hs == HttpStatus.OK) {	
 				return re.getBody();
@@ -65,7 +65,8 @@ public class ServicioProxyBiblioteca {
 	 
 	public boolean modificar(Libro l){
 		try {
-			restTemplate.put(URL + l.getId(), l, Libro.class);
+			restTemplate.put(URL + "/" + l.getId(), l, Libro.class);
+			System.out.println("modificar -> Libro modificado con éxito");
 			return true;
 		} catch (HttpClientErrorException e) {
 			System.out.println("modificar -> El libro no se ha modificado, id: " + l.getId());
@@ -79,7 +80,7 @@ public class ServicioProxyBiblioteca {
 	
 	public boolean borrar(int id){
 		try {
-			restTemplate.delete(URL + id);
+			restTemplate.delete(URL + "/" + id);
 			return true;
 		} catch (HttpClientErrorException e) {
 			System.out.println("borrar -> El libro no se ha borrado, id: " + id);
@@ -88,6 +89,7 @@ public class ServicioProxyBiblioteca {
 		}
 	}
 	
+	//Listar todos los libros 
 	
 	public List<Libro> listar(){
 		try {

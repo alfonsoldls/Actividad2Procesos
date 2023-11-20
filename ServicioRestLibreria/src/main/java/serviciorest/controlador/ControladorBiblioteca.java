@@ -34,7 +34,7 @@ public class ControladorBiblioteca {
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Libro> altaLibro(@RequestBody Libro l) {
 		System.out.println("Nuevo libro dado de alta: " + l);
-		if (daoBiblioteca.altaLibro(l) == true) {
+		if (daoBiblioteca.altaLibro(l) == false) {
 			return new ResponseEntity<Libro>(l,HttpStatus.CREATED);//201 CREATED
 		}else {
 			return new ResponseEntity<Libro>(HttpStatus.BAD_REQUEST);//400 BAD REQUEST
@@ -84,7 +84,7 @@ public class ControladorBiblioteca {
 	//OBTENER UN LIBRO POR ID
 	@GetMapping(path="/libros/{id}",produces = MediaType.APPLICATION_JSON_VALUE)	
 	public ResponseEntity<Libro> getLibro(@PathVariable("id") int id) {
-		System.out.println("Buscando persona con id: " + id);
+		System.out.println("Buscando libro con id: " + id);
 		Libro l = daoBiblioteca.findById(id);
 		if(l != null) {
 			return new ResponseEntity<Libro>(l,HttpStatus.OK);//200 OK
