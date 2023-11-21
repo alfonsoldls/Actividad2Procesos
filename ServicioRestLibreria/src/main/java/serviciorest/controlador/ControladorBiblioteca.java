@@ -71,7 +71,11 @@ public class ControladorBiblioteca {
 		l.setId(id);
 		Libro lUpdate = daoBiblioteca.modificarLibro(l);
 		if(lUpdate != null) {
-			return new ResponseEntity<Libro>(HttpStatus.OK);//200 OK
+			if (lUpdate.getTitulo().equalsIgnoreCase("duplicate")) {
+				return new ResponseEntity<Libro>(HttpStatus.CONFLICT);//409 CONFLICT
+			}else{
+				return new ResponseEntity<Libro>(HttpStatus.OK);//200 OK
+			}
 		}else {
 			return new ResponseEntity<Libro>(HttpStatus.BAD_REQUEST);//400 BAD REQUEST
 		}

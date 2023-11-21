@@ -64,7 +64,7 @@ public class DaoBiblioteca {
 		try {
 				Libro libroDuplicado = new Libro(0, "duplicado", null, 0);
 				for (Libro lb: listaLibros) {
-					if (lb.getTitulo().equalsIgnoreCase(lb.getTitulo())) {
+					if (lb.getTitulo().equalsIgnoreCase(l.getTitulo())) {
 						return libroDuplicado;
 					}
 				}	

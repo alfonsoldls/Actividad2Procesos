@@ -163,12 +163,12 @@ public class Application implements CommandLineRunner{
 				String titulo = "";
 				boolean passTitulo = true;
 				do {
-					System.out.println("Introduzca el título del nuevo libro:");
+					System.out.println("Introduzca el titulo del nuevo libro:");
 					titulo = scanner.nextLine();
 					for (Libro libro : lista) {
 						if (titulo.equalsIgnoreCase(libro.getTitulo())) {
 							passTitulo = false;
-							System.out.println("El título introducido ya existe");
+							System.out.println("El titulo introducido ya existe");
 							break;
 						}else {
 							passTitulo = true;
@@ -178,7 +178,7 @@ public class Application implements CommandLineRunner{
 				
 				System.out.println("Introduzca la editorial del nuevo libro:");
 				String editorial = scanner.nextLine();
-				System.out.println("Introduzca una nota sobre el nuevo libro:");
+				System.out.println("Introduzca una nota para el nuevo libro:");
 				int nota = scanner.nextInt();
 				
 				Libro l = new Libro(id, titulo, editorial, nota);
